@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.example.demo.service.PersonService;
 
 @RequestMapping("api/v1/person")
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class PersonController {
 	
 	private final PersonService personService;
@@ -28,17 +30,20 @@ public class PersonController {
 	}
 	
 	@PostMapping
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	public void addPerson(@RequestBody Person person){
 		personService.addPerson(person);
 	}
 	
 	@GetMapping
+	@CrossOrigin(origins = "*", maxAge = 3600)
 	public List<Person> getAllPeople()
 	{
 		return personService.getAllPeople();
 	}
 	
 	@DeleteMapping(path ="{id}")
+	@CrossOrigin(origins = "*")
 	public void deletePersonById(@PathVariable("id")UUID id){
 		personService.deletePerson(id);
 		
